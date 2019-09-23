@@ -110,17 +110,33 @@ fun main() = application {
         extend {
             drawer.shadeStyle = shadeStyle {
                 fragmentTransform = """
-                |float glowRadius=p_size;
-                |vec2 normBallPos=p_ballPos/p_resolution;
                 |vec2 normScreenPos=c_screenPosition/p_resolution;
+                |
+                |
+                |vec2 normBallPos=p_ballPos/p_resolution;
                 |float ballDistance=distance(normBallPos, normScreenPos);
-                |
                 |float multiplyDistance=ballDistance*100.0;
+                |float sumColor=p_size/multiplyDistance;
                 |
-                |float sumColor=glowRadius/multiplyDistance;
+                |normBallPos=p_ballPosTwo/p_resolution;
+                |ballDistance=distance(normBallPos, normScreenPos);
+                |multiplyDistance=ballDistance*80.0;
+                sumColor/=p_sizeTwo/multiplyDistance;
+                |
+                normBallPos=p_ballPosThree/p_resolution;
+                |ballDistance=distance(normBallPos, normScreenPos);
+                |multiplyDistance=ballDistance*80.0;
+                sumColor+=p_sizeThree/multiplyDistance;
+                |
+                |float modColor=mod(sumColor, 1.0);
                 |
                 |//x_fill.rgba=vec4(vec3((1.0/multiplyDistance)*vec3(p_colVec,1.0)),1.0);
-                |x_fill.rgba=vec4(vec3((sumColor)*vec3(p_colVec,1.0)),1.0);
+                |//x_fill.rgba=vec4(vec3((modColor)*vec3(p_colVec,1.0)),1.0);
+                |
+                |
+                |//x_fill.rgba=vec4(vec3(sumColor,sumColor,1.0),1.0);
+
+                |x_fill.rgba=vec4(vec3(mod(sumColor,2.0),mod(sumColor,1.0),mod(sumColor,3.0)),1.0);
             """.trimMargin()
                 parameter("resolution", Vector2(width.toDouble(), height.toDouble()))
                 parameter("colVec", ballList[0].colorShift)
