@@ -116,28 +116,24 @@ fun main() = application {
                 |vec2 normBallPos=p_ballPos/p_resolution;
                 |float ballDistance=distance(normBallPos, normScreenPos);
                 |float multiplyDistance=ballDistance*100.0;
-                |float sumColor=p_size/multiplyDistance;
+                |vec2 sumColor=vec2(p_size/multiplyDistance)*vec2(0.7,0.9);
                 |
                 |normBallPos=p_ballPosTwo/p_resolution;
                 |ballDistance=distance(normBallPos, normScreenPos);
-                |multiplyDistance=ballDistance*80.0;
-                sumColor+=p_sizeThree/multiplyDistance;
+                |multiplyDistance=ballDistance*100.0;
+                sumColor+=vec2(p_sizeTwo/multiplyDistance)*vec2(0.9,0.3);
 
                 |
                 normBallPos=p_ballPosThree/p_resolution;
                 |ballDistance=distance(normBallPos, normScreenPos);
-                |multiplyDistance=ballDistance*80.0;
-                |sumColor+=4.0/(p_sizeTwo/multiplyDistance);
+                |multiplyDistance=ballDistance*100.0;
+                |sumColor+=vec2(p_sizeThree/multiplyDistance)*vec2(0.5,0.7);
 
-                |float modColor=mod(sumColor, 1.0);
-                |
-                |//x_fill.rgba=vec4(vec3((1.0/multiplyDistance)*vec3(p_colVec,1.0)),1.0);
-                |//x_fill.rgba=vec4(vec3((modColor)*vec3(p_colVec,1.0)),1.0);
                 |
                 |
-                |//x_fill.rgba=vec4(vec3(sumColor,sumColor,1.0),1.0);
+                x_fill.rgba=vec4(vec3(sumColor, 1.0),1.0);
 
-                |x_fill.rgba=vec4(vec3(mod(sumColor,2.0),mod(sumColor,1.0),mod(sumColor,3.0)),1.0);
+                |//x_fill.rgba=vec4(vec3(mod(sumColor,2.0),mod(sumColor,1.0),mod(sumColor,3.0)),1.0);
             """.trimMargin()
                 parameter("resolution", Vector2(width.toDouble(), height.toDouble()))
                 parameter("colVec", ballList[0].colorShift)
