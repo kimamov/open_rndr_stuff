@@ -121,13 +121,14 @@ fun main() = application {
                 |normBallPos=p_ballPosTwo/p_resolution;
                 |ballDistance=distance(normBallPos, normScreenPos);
                 |multiplyDistance=ballDistance*80.0;
-                sumColor/=p_sizeTwo/multiplyDistance;
+                sumColor+=p_sizeThree/multiplyDistance;
+
                 |
                 normBallPos=p_ballPosThree/p_resolution;
                 |ballDistance=distance(normBallPos, normScreenPos);
                 |multiplyDistance=ballDistance*80.0;
-                sumColor+=p_sizeThree/multiplyDistance;
-                |
+                |sumColor+=4.0/(p_sizeTwo/multiplyDistance);
+
                 |float modColor=mod(sumColor, 1.0);
                 |
                 |//x_fill.rgba=vec4(vec3((1.0/multiplyDistance)*vec3(p_colVec,1.0)),1.0);
